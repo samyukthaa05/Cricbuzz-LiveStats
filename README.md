@@ -15,7 +15,7 @@ Cricket analysts, broadcasters, fantasy leagues, and enthusiasts require timely 
 3. **An interactive multi-page web application** built with Streamlit for data exploration, query execution, and database administration.
 
 ### Key Capabilities
-- **Live Match Tracking:** Ongoing match statuses, recent results, upcoming schedules, and ball-by-ball innings scorecards fetched dynamically via API.
+- **Live Match Tracking:** Ongoing match statuses, recent results, upcoming schedules, and detailed innings scorecards fetched dynamically via API.
 - **Player Statistics & Leaderboards:** Live API leaderboards (Most Runs, Most Wickets, Best Strike Rate, Best Economy, ICC Rankings) and historical database player leaderboards across Test, ODI, and T20I formats.
 - **SQL Analytics (25 Practice Queries):** Complete implementation of 25 structured SQL queries divided into Beginner (Q1–Q8), Intermediate (Q9–Q16), and Advanced (Q17–Q25) categories, with syntax-highlighted SQL, one-click execution, execution timers, and dynamic charts.
 - **Custom SQL Query Runner:** An interactive query editor allowing users to execute custom read-only `SELECT` and `WITH` queries against the cricket schema, inspect table definitions, and export results to CSV.
@@ -79,7 +79,7 @@ Cricket analysts, broadcasters, fantasy leagues, and enthusiasts require timely 
 
 ## Data Architecture & Sources
 
-To ensure reliable performance and realistic analysis, the project separates live streaming data from persistent historical data:
+To ensure reliable performance and realistic analysis, the project separates current API data from persistent historical data:
 
 | Component | Source | Purpose | Details |
 | :--- | :--- | :--- | :--- |
@@ -128,8 +128,7 @@ Cricbuzz_LiveStats_Complete_Project/
 │   ├── __init__.py
 │   └── settings.py             # Environment-backed configuration and path resolution
 ├── data/
-│   ├── .gitkeep
-│   └── cricbuzz_livestats.db   # Local SQLite database (populated with historical data)
+│   └── .gitkeep
 ├── database/
 │   ├── __init__.py
 │   ├── connection.py           # Database connection manager with foreign keys enabled
@@ -172,7 +171,6 @@ Cricbuzz_LiveStats_Complete_Project/
 │   ├── error_handler.py        # Safe exception handling and user notifications
 │   ├── helpers.py              # UI formatting, metric cards, and sidebar navigation
 │   └── validation.py           # Input validation rules for form submissions
-├── .env                        # Local environment file with API credentials (git-ignored)
 ├── .env.example                # Template environment file for configuration
 ├── .gitignore                  # Git ignore rules for virtual environments, secrets, and caches
 ├── app.py                      # Application entry point (per project specification)
@@ -282,7 +280,7 @@ python -m pytest -v
 ```
 
 ### Test Coverage Summary:
-- **`tests/test_database.py`**: Validates schema table creation, primary keys, foreign key constraints, and connection pooling.
+- **`tests/test_database.py`**: Validates schema table creation, primary keys, foreign key constraints, and database connections.
 - **`tests/test_crud.py`**: Tests form validation, player insertion/updating, match creation/modification, and referential integrity protection on deletes.
 - **`tests/test_api.py`**: Tests API response normalization, scorecard data structure extraction, and safe fallback handling when credentials are empty or offline.
 - **`tests/test_analytics.py`**: Verifies that all 25 queries are present in the catalog, execute without syntax errors, and return valid non-empty result sets.
